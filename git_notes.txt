@@ -1,0 +1,20 @@
+To set-up your git: 
+git config --global user.name "Laura"
+git config --global user.email "lsales@users.noreply.github.com"
+git config --global user.email  (to check email address)
+
+
+Create new repository. Copy web address
+git clone https://github.com/lsales/rep_Phys177
+
+Useful commands to see, add and commit files:
+git status
+git add
+git commit -a -m "small comment here to describe the change made"
+git push
+
+To delete files:
+git rm   (warning: only to remove from global repository)
+
+For local directory, if file accidentally deleted:
+git checkout -- filename
