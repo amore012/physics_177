@@ -18,6 +18,8 @@ vmax = raw_input "Please enter a maximum velocity: "
 x_init = 800
 g = 9.8 #m/s
 
+"Add something new"
+
 #x = 1/2 acceleration * time^2 + v*t + initial_height
 t = (-v_o + ((v_o ** 2) - 2 * -g * x_o)**(.5))/g
 print t
