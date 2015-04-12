@@ -2,9 +2,11 @@
 This is our first exciting image
 Written on class 04/02/2015
 """
-
+import matplotlib
+matplotlib.use('Agg')
 import numpy as np
 import matplotlib.pylab as plt
+matplotlib.use('Agg')
 import math
 
 ax = plt.subplot(111)
@@ -41,4 +43,5 @@ plt.gray()
 ax.set_xlabel('x [cm]')
 ax.set_ylabel('y [cm]')
 
-plt.savefig('newplot.png',format='png')  #keep a hard copy of my figure
+
+plt.savefig('ripples_output.png',format='png')  #keep a hard copy of my figure
