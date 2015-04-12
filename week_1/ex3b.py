@@ -43,11 +43,11 @@ np.savetxt('VelocityBin.txt', VelocityBin, header='These are the students grades
 #xmax, ymin, ymax
 from numpy.random import rand
 
-x = VelocityBin
-y = VelocityStep
+y = VelocityBin
+x = VelocityStep
 plt.scatter(x, y, c='red', label='Steps', alpha=1, edgecolors='none')
-plt.xlabel('Time (s)')
-plt.ylabel('Initial Velocity (m/s)')
+plt.ylabel('Time (s)')
+plt.xlabel('Initial Velocity (m/s)')
 plt.legend()
 plt.grid(True)
 
