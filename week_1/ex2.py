@@ -53,7 +53,7 @@ if choice == 3:
                 else:
                     print "That was not a valid entry. Please make a valid entry"
         else:
-            print "Something didn't quite add up, please ensure the summed weight totals one!"
+            print "Something didn't quite add up, please ensure the summed weight totals 100%!"
 
 students = input ("How many students are you entering grades for? ")
 
