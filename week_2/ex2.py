@@ -1,9 +1,5 @@
 fromFile = open('extra_info_labs/velocities.txt', 'r')
 
-"""
-If you want multiple graphs on a sigle graph,
-there is an ax=
-"""
 #Standard input library booklet
 import matplotlib
 matplotlib.use('Agg')
@@ -12,10 +8,9 @@ import math as math
 import matplotlib.pyplot as plt
 
 #Initial values to be recieved
-plotPoints = 200
 #functionXValues = np.zeros(plotPoints)
 #functionYValues = functionXValues
-pointsArray = np.zeros((plotPoints,2))
+pointsArray = np.zeros((100,2))
 solutionsArray = pointsArray
 
 #Input values for the use in later calculations
@@ -28,7 +23,7 @@ pointsArray = np.loadtxt(fromFile, delimiter='\t', unpack=True)
 trapIntegral = 0
 midIntegral = 0
 
-for j in range((plotPoints/2) - 1):
+for j in range(199):
     xbin = 1
     ybin = pointsArray[j + 1][1] + pointsArray[j][1]
     ymbin = (pointsArray[j + 1][1] + pointsArray[j][1])*.5
@@ -44,7 +39,7 @@ for j in range((plotPoints/2) - 1):
     simpsonRule = 2.*midIntegral+trapIntegral
     simpsonRule = simpsonRule / 3.
     
-
+header = ['Time','Trap Dist', 'Simpson Dist']
 
 
 np.savetxt('Velocities.txt', simpsonRule, header='These are the students grades', footer='That is all')
