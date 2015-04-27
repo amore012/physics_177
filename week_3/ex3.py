@@ -1,8 +1,4 @@
-"""
-If you want multiple graphs on a sigle graph,
-there is an ax=
-"""
-#Standard input library booklet
+#Standard input library block
 import matplotlib
 matplotlib.use('Agg')
 import numpy as np
