@@ -6,8 +6,6 @@ matplotlib.use('Agg')
 import numpy as np
 import math
 import matplotlib.pyplot as plt
-import scipy
-from scipy.integrate import simps
 
 n = 1.
 k = 1.
