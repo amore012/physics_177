@@ -4,6 +4,8 @@ for two simple functions
 Class: Apr. 28th
 """
 
+import matplotlib
+matplotlib.use('Agg')
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -24,3 +26,4 @@ y -= (np.sum(x)/float(len(x)))    #option to remove frequency "0" contribution
 
 coeff = dft(y)
 plt.plot(np.arange(len(coeff)),np.abs(coeff)**2,linewidth=3)
+plt.savefig('example.png')

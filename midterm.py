@@ -46,3 +46,6 @@ for n in range(49):
     trap_result += (.5 * (y[n+1] + y[n])*dx)
 print "My Trapezoidal rule gives %s." %(trap_result)
 print "Theirs gives %s" %(np.trapz(y, dx =1./50.))
+
+#No Error, so skip that noise. I am too good.
+
