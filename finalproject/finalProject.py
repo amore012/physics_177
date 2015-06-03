@@ -9,7 +9,7 @@ Purpose: To confirm the calculations of the paper written by A. Pontzen and
          F. Governato
 """
 
-#================Section I: Abstract/Intro==========================
+#================Section I & II: Abstract/Intro======================
 """
 In summary:
 - Obserbed kinematics point to a constant density core
@@ -43,11 +43,10 @@ import math as math
 import matplotlib.pyplot as plt
 import scipy
 import scipy.signal as sp
-np.set_printoptions(precision = 15)
 
 #-----------------------Declare Variables-----------------------
 
-t = 2000         #Time [mYr]
+t = 2000        #Time [mYr]
 
 v_o = 1.        #Initial potential
 
@@ -146,11 +145,12 @@ plt.xlabel('Time[Rel]')
 plt.savefig('finalproject/timeOutput.png')
 plt.show
 
+#On the Plot, The periods of drastic change in oscilation correlate to the
+#theorized energy release periods of the paper.
 
 #===================References and Citations=======================
 """
 A. Pontzen and F. Governato. How supernova feedback turns dark matter cusps into cores
 F. Governato. At the heart of the matter: the origin of bulgeless dwarf galaxies and Dark Matter cores
 Philip F. Hopkins. A New Class of Accurate, Mesh-Free Hydrodynamic Simulation Methods
-
 """
