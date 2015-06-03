@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 
 
 def dft(y):
+  
     N = len(y)
     c = np.zeros(N//2+1,complex)
     for k in range(N//2+1):
