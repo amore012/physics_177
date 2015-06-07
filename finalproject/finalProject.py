@@ -46,14 +46,18 @@ import scipy.signal as sp
 
 #-----------------------Declare Variables-----------------------
 
-t = 2000        #Time [mYr]
+t = 150        #Time [mYr]
 
-v_o = 1.        #Initial potential
+v_o = 0.        #Initial potential
 
 n = 2.          #Powers which determine orbit type; n == -1 would, for
                 #example, describe a Keplerian orbit [integer]
 
-r = 1.          #Radial distance between particles [kPc]
+i = 1
+
+amp = 1
+
+r = 10.          #Radial distance between particles [kPc]
 
 j = 1.          #Conserved angular momentum
 
@@ -63,17 +67,19 @@ del_e_1 = 1.    #Change in energy
 
 del_v = 1.      #Change in potential
 
-del_v_o = 1.    #Change in initial potential energy
+del_v_o = 5.    #Change in initial potential energy
 
-a = 0.          #Amplitude coefficient
+a = 1.          #Amplitude coefficient
 
 a_o = 1.        #Initial amplitude at each step
 
 phi_0 = 0.      #Initial orbital phase
 
-omega_1 = 10.    #The initial frequency
+omega_1 = 1.    #The initial frequency
 
-omega_0 = 10.*omega_1   #The progressing frequency
+omega_0 = 10.  #The progressing frequency
+
+afp = np.linspace(0,50,t) #The number of points the program should plot
 
 #--------------------Define Arrays for Output-------------------
 
@@ -81,7 +87,7 @@ e_out = np.zeros(t)   #To output the energy as a function of time
 
 v_out = np.zeros(t)   #To output the potential as a funciton of time
 
-x_out = np.zeros(t)   #To output the position as a function of time
+x_out = np.zeros(t*3)   #To output the position as a function of time
 
 
 #--------------------Define Functions--------------------------
@@ -101,44 +107,59 @@ v_eff = v + j**2 / (2*r**2)
 #e_f_a = e_o *((v_f/v_o)**(2/(2+n)))
 
 #Determining the amplitude after each step
-def stepAmplitude(a_o):
-    a_1 = ((a_o**2) * (1 + ((omega_0**2 - omega_1**2)/(omega_0**2))*(np.sin(phi_0))**2))**.5
+def stepAmplitude(a_o, omega_0, omega_1, m):
+    a_1 = ((a_o**2) * (1 + ((omega_0**2 - omega_1**2)/(omega_0**2))*(np.sin(m*phi_0))**2))**.5
     return a_1
 
 #Final energy function to be iterated recursively
-def finalEnergy(e_o):
+def finalEnergy(e_o, del_v_o, del_v):
     e_f_t = e_o + ((del_v_o/del_v)**2) * (2 * n * e_o)/((2+n)**2)
     return e_f_t
 
 
 #For the orbit, when n == 2, it becomes identical to a harmonic
 #oscillator. Thus it can be analyzed as follows:
-def orbitalOscillation(a, v_o, t):
+def orbitalOscillation(q, v_o, t, phi_0):
     x = a*np.cos(((2*v_o)**.5)*t + phi_0)
     return x
 
 
 #=============Calculating The Final Energy Recursively=============
-for n in range(t):
-    #At each step, the energy exerted changes as a function of the previous
-    e_o = finalEnergy(e_o)
-    e_out[n] = e_o
+for i in range(4):
+    if i == 2:
+        amp = 2
+    else:
+        amp = 1
     
-    #Since the energy has changed, so too has the potential
-    v_o = expectedPotential(e_o, n)
-    v_out[n] = v_o
-    
-    #The Amplitude for the oscillations then adjusts for the x value
-    a_o = stepAmplitude(a_o)
-    
-    #With all this information, the x value is given, and the process repeats
-    x = orbitalOscillation(a_o, v_o, n)
-    x_out[n] = x
-    #print v_out
+    if i == 1:
+        omega_1 = omega_0
+    elif i == 2:
+        omega_1 = 2 * omega_0
+    elif i == 3:
+        omega_1 = omega_1    
+    for m in range(t):
+
+        #At each of the three steps, the energy exerted changes as a function of the previous
+        z = finalEnergy(e_o, del_v_o, del_v)
+        e_out[m] = z
+        
+        #Since the energy has changed, so too has the potential
+        del_v_o = del_v
+        v_o = expectedPotential(e_o, n)
+        del_v = del_v_o - v_o + 1
+        v_out[m] = v_o
+        
+        #The Amplitude for the oscillations then adjusts for the x value
+        a = stepAmplitude(amp, omega_0, omega_1, m)
+        
+        #With all this information, the x value is given, and the process repeats
+        y = orbitalOscillation(a, v_o, afp[m]*i, phi_0)
+        x_out[m*i] = y
+        #print v_out
     
 
 #-------Printing and output------------
-plt.plot(range(t), x_out)
+plt.plot(x_out)
 plt.title('Displacement of particles as a function of time')
 plt.ylabel('Displacement [kPc]')
 plt.xlabel('Time[Rel]')
