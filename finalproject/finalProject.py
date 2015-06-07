@@ -46,7 +46,7 @@ import scipy.signal as sp
 
 #-----------------------Declare Variables-----------------------
 
-t = 150        #Time [mYr]
+t = 300        #Time [mYr]
 
 v_o = 0.        #Initial potential
 
@@ -79,7 +79,7 @@ omega_1 = 1.    #The initial frequency
 
 omega_0 = 10.  #The progressing frequency
 
-afp = np.linspace(0,50,t) #The number of points the program should plot
+afp = np.linspace(0,10,t) #The number of points the program should plot
 
 #--------------------Define Arrays for Output-------------------
 
@@ -137,6 +137,7 @@ for i in range(4):
         omega_1 = 2 * omega_0
     elif i == 3:
         omega_1 = omega_1    
+    
     for m in range(t):
 
         #At each of the three steps, the energy exerted changes as a function of the previous
@@ -150,10 +151,14 @@ for i in range(4):
         v_out[m] = v_o
         
         #The Amplitude for the oscillations then adjusts for the x value
-        a = stepAmplitude(amp, omega_0, omega_1, m)
+        a = stepAmplitude(a_o, omega_0, omega_1, m)
         
         #With all this information, the x value is given, and the process repeats
         y = orbitalOscillation(a, v_o, afp[m]*i, phi_0)
+        
+        if i == 2:
+            y = y * 2
+
         x_out[m*i] = y
         #print v_out
     
